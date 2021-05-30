@@ -29,9 +29,8 @@ DS1302 rtc(kCePin, kIoPin, kSclkPin);
  
 
 }
-//Kolory zegara (sekundy minuty i godziny)
+//Colors sec, min, h
 void printTime() {
-  // Get the current time and date from the chip.
   Time t = rtc.time();
   hour1=t.hr;
   min1=t.min;
@@ -64,7 +63,7 @@ void printTime() {
     }
 }
 
-//animacja na przycisk "up"
+//animation, button "up"
 void animation()
 {
   colorWipe(strip.Color(255, 0, 0), 25); // Red
@@ -79,7 +78,7 @@ void animation()
       }
   
  }
- //pętla do colorWipe
+ // colorWipe
  void colorWipe(uint32_t c, uint8_t wait) {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
     strip.setPixelColor(i, c);
@@ -87,7 +86,7 @@ void animation()
     delay(wait);
   }
 }
-//pętla do theaterChade
+//theaterChade
   void theaterChase(uint32_t c, uint8_t wait) {
   for (int j=0; j<10; j++) {  //do 10 cycles of chasing
     for (int q=0; q < 3; q++) {
@@ -136,7 +135,7 @@ pinMode( clockSet,INPUT);
   rtc.halt(false);
 
 
-  //moje ledy
+  //my led's
   #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
   clock_prescale_set(clock_div_1);
 #endif
@@ -231,7 +230,7 @@ if (digitalRead(down)==HIGH)
   }
     if (digitalRead(down) == HIGH)
   {
-      //tu będzie trzecia animacja (może się uda xD)
+      //my animation - in progress....
         pixels.clear(); // Set all pixel colors to 'off'
         for(int i=0; i<NUMPIXELS; i++) { // For each pixel...
          pixels.setPixelColor(i, pixels.Color(0, 150, 0));
