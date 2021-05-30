@@ -25,20 +25,23 @@ byte control=0;
 const int kIoPin   = 6;  // Input/Output
 const int kSclkPin = 7;  // Serial Clock
  
-DS1302 rtc(kCePin, kIoPin, kSclkPin);
+DS1302 rtc(kCePin, kIoPin, kSclkPin); //RTC module
  
 
 }
 //Colors sec, min, h
 void printTime() {
-  Time t = rtc.time();
+  Time t = rtc.time(); // < time from RTC module 
   hour1=t.hr;
   min1=t.min;
   seconds=t.sec; 
-  if(hour1>=12){hour1=hour1-12;}
-  pixels.setPixelColor(5*hour1, pixels.Color(25,25,255));
-  pixels.setPixelColor(min1, pixels.Color(0,200,10));
-  pixels.setPixelColor(seconds, pixels.Color(255,0,0));
+  if(hour1>=12)
+  {
+    hour1=hour1-12; //resetting the hours
+  }
+  pixels.setPixelColor(5*hour1, pixels.Color(25,25,255)); //colors of hour
+  pixels.setPixelColor(min1, pixels.Color(0,200,10)); //colors of minutes
+  pixels.setPixelColor(seconds, pixels.Color(255,0,0)); //colors of seconds
   
   pixels.show();
   //Serial.println(t.sec);
@@ -46,6 +49,7 @@ void printTime() {
   //pixels.setPixelColor(t.sec-1, pixels.Color(0,0,0));
   
   pixels.show();
+  //animations of seconds:
   if(seconds==0)
    { 
     pixels.setPixelColor(min1-1, pixels.Color(0,0,0));
@@ -56,7 +60,7 @@ void printTime() {
     pixels.setPixelColor(i, pixels.Color(0,0,0));
       }
     }
-
+//animations of minutes
    if(min1==0)
   { 
     pixels.setPixelColor(59, pixels.Color(0,0,0));
@@ -78,7 +82,7 @@ void animation()
       }
   
  }
- // colorWipe
+ // colorWipe animation - to understand....
  void colorWipe(uint32_t c, uint8_t wait) {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
     strip.setPixelColor(i, c);
@@ -86,7 +90,7 @@ void animation()
     delay(wait);
   }
 }
-//theaterChade
+//theaterChade animation - to understand....
   void theaterChase(uint32_t c, uint8_t wait) {
   for (int j=0; j<10; j++) {  //do 10 cycles of chasing
     for (int q=0; q < 3; q++) {
@@ -110,27 +114,28 @@ void animation()
  //control=0;
     hour1=yhour1;
     min1=ymin1;
-     Time t(2021, 5, 23,yhour1, ymin1, 0, Time::kFriday);
+     Time t(2021, 5, 23,yhour1, ymin1, 0, Time::kFriday); //start time
     rtc.time(t);
     
     }
   
-
+//buttons:
  int clockSet =10;
  int up=11;
  int down=12;
+
 void setup() {
   Serial.begin(9600);
 #if defined (__AVR_ATtiny85__)
-  if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
+  if (F_CPU == 16000000) clock_prescale_set(clock_div_1); //definition of a microcontroller clock
 #endif
 strip.begin();
   strip.show();
 pixels.begin();
 
-pinMode( clockSet,INPUT);
+pinMode( clockSet,INPUT); //button clocset
 
- 
+ //to understand...
   rtc.writeProtect(false);
   rtc.halt(false);
 
@@ -158,13 +163,19 @@ if (digitalRead(up)==HIGH)
 {
   yhour1++;
   while(digitalRead(up)==HIGH);
-  if(yhour1==12){yhour1=0;}
+  if(yhour1==12)
+  {
+    yhour1=0; //reset hour
+  }
 }
 if (digitalRead(down)==HIGH)
 {
   yhour1--;
   while(digitalRead(down)==HIGH);
-  if(yhour1==255){yhour1=11;}
+  if(yhour1==255)
+  {
+    yhour1=11;
+  }
 }
  
   pixels.setPixelColor(5*yhour1, pixels.Color(25,25,255));
@@ -201,13 +212,19 @@ if (digitalRead(down)==HIGH)
 {
   ymin1++;
   while(digitalRead(up)==HIGH);
-  if(ymin1==60){yhour1=0;}
+  if(ymin1==60)
+  {
+    yhour1=0; //reset minutes
+  }
 }
 if (digitalRead(down)==HIGH)
 {
   ymin1--;
   while(digitalRead(down)==HIGH);
-  if(ymin1==255){ymin1=59;}
+  if(ymin1==255)
+  {
+    ymin1=59;
+  }
 } 
   pixels.setPixelColor(ymin1, pixels.Color(0,205,10));
   pixels.show();
