@@ -110,7 +110,7 @@ void animation()
  //control=0;
     hour1=yhour1;
     min1=ymin1;
-     Time t(2018, 2, 23,yhour1, ymin1, 0, Time::kFriday);
+     Time t(2021, 5, 23,yhour1, ymin1, 0, Time::kFriday);
     rtc.time(t);
     
     }
