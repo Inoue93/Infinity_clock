@@ -63,7 +63,7 @@ void printTime() {
 //animations of minutes
    if(min1==0)
   { 
-    pixels.setPixelColor(59, pixels.Color(0,0,0));
+    pixels.setPixelColor(59, pixels.Color(0,0,0)); //cleaning led's
     }
 }
 
