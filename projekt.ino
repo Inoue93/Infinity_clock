@@ -109,7 +109,7 @@ void animation()
 }
 
 //RTC:
-  void yenihour1()
+  void newhour1()
   {
  //control=0;
     hour1=yhour1;
@@ -184,7 +184,7 @@ if (digitalRead(down)==HIGH)
   pixels.setPixelColor(5*yhour1, pixels.Color(0,0,0));
   pixels.show();
   delay(100);
-  yenihour1();
+  newhour1();
   if(digitalRead(clockSet)==HIGH)
   { 
   while(digitalRead(clockSet)==HIGH)
@@ -228,7 +228,7 @@ if (digitalRead(down)==HIGH)
 } 
   pixels.setPixelColor(ymin1, pixels.Color(0,205,10));
   pixels.show();
-  yenihour1();
+  newhour1();
   delay(100);
   pixels.setPixelColor(ymin1, pixels.Color(0,0,0));
      pixels.show();
@@ -237,7 +237,7 @@ if (digitalRead(down)==HIGH)
   if (control==3)
   {
     control=0;
-     yenihour1();
+     newhour1();
   }
   while (control==0)
   {
