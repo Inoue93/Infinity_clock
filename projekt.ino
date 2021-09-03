@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <DS1302.h>
 
+//sprawdzić czy ta biblioteka jest niezbędna:
 #ifdef __AVR__
   #include <avr/power.h>
 #endif
