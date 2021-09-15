@@ -42,11 +42,7 @@ void printTime() {
   pixels.setPixelColor(seconds, pixels.Color(255,0,0)); //colors of seconds
   
   pixels.show();
-  //Serial.println(t.sec);
-  //pixels.setPixelColor(t.hr, pixels.Color(0,0,0));
-  //pixels.setPixelColor(t.sec-1, pixels.Color(0,0,0));
-  
-  pixels.show();
+
   //animations of seconds:
   if(seconds==0)
    { 
