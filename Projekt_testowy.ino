@@ -152,7 +152,7 @@ void loop() {
   delay(100);
   pixels.setPixelColor(5*yhour1, pixels.Color(0,0,0));
   pixels.show();
-  delay(100);
+  delay(100);  //flashing hour LED
 if (digitalRead(up)==HIGH)
 {
   yhour1++;
@@ -166,7 +166,7 @@ if (digitalRead(down)==HIGH)
 {
   yhour1--;
   while(digitalRead(down)==HIGH);
-  if(yhour1==255)
+  if(yhour1==255) //?
   {
     yhour1=11;
   }
