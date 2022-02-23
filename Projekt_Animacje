@@ -79,8 +79,8 @@ void animation()
   
  }
  // colorWipe animation - to understand....
- void colorWipe(uint32_t c, uint8_t wait) {     // c = color of leds
-  for(uint16_t i=0; i<pixels.numPixels(); i++) {    // t = time 
+ void colorWipe(uint32_t c, int wait) {     // c = color of leds
+  for(int i=0; i<pixels.numPixels(); i++) {    // t = time 
     pixels.setPixelColor(i, c);
     pixels.show();
     delay(wait);
