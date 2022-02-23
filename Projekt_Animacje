@@ -74,10 +74,10 @@ void animation()
 //    theaterChase(pixels.Color(127, 127, 127), 50); // White
 //  theaterChase(pixels.Color(127, 0, 0), 50); // Red
 //  theaterChase(pixels.Color(0, 0, 127), 50);
-//  for(int i=1;i<60;i++)
-//      {
-//    pixels.setPixelColor(i, pixels.Color(0,0,0));
-//      }
+  for(int i=1;i<60;i++)  //clear pixels after animation
+      {
+   pixels.setPixelColor(i, pixels.Color(0,0,0));
+     }
   
  }
  // colorWipe animation - to understand....
