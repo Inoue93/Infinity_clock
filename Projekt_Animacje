@@ -289,7 +289,12 @@ void loop() {
             mode++;
             Serial.println(mode);
             }
-           }
+          }
+           if (digitalRead(clockSet)==HIGH)
+            {
+              colorWipe(pixels.Color(0, 0, 0), 40);
+               mode=0;
+            }
       }
            
 
@@ -303,6 +308,11 @@ void loop() {
             mode++;
             Serial.println(mode);
               }
+            if (digitalRead(clockSet)==HIGH)
+            {
+              colorWipe(pixels.Color(0, 0, 0), 40);
+               mode=0;
+            }
           }
        if (mode ==3)
           {
@@ -313,7 +323,12 @@ void loop() {
             pixels.show();
             mode++;
             Serial.println(mode);
-              }
+            }
+            if (digitalRead(clockSet)==HIGH)
+            {
+              colorWipe(pixels.Color(0, 0, 0), 40);
+               mode=0;
+            }
           }
 
          if (mode ==4)
@@ -325,7 +340,12 @@ void loop() {
             pixels.show();
             mode++;
             Serial.println(mode);
-              }
+             }
+            if (digitalRead(clockSet)==HIGH)
+            {
+              colorWipe(pixels.Color(0, 0, 0), 40);
+              mode=0;
+            }
           }
            
         if(mode==5)
