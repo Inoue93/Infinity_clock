@@ -12,6 +12,7 @@
 #define BRIGHTNESS 50 
 #define DELAYVAL 500
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 //Adafruit_NeoPixel pixels = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
 
 #define kCePin  5  // Chip Enable
@@ -28,7 +29,7 @@ byte mode=0;
 
  DS1302 rtc(kCePin, kIoPin, kSclkPin); //RTC module 
 
-//Colors sec, min, h
+//Colors sec, min, h    
 void printTime() {
   Time t = rtc.time(); // < time from RTC module 
   hour1=t.hr;
@@ -38,6 +39,12 @@ void printTime() {
     {
       hour1=hour1-12; //resetting the hours
     }
+    for(int i=1;i<60;i++)
+      {
+    pixels.setPixelColor(i, pixels.Color(1, 1, 1));  //background
+      }
+    
+  pixels.setPixelColor(seconds-1, pixels.Color(1, 1, 1)); // clean seconds
   pixels.setPixelColor(5*hour1, pixels.Color(25,25,255)); //colors of hour
   pixels.setPixelColor(min1, pixels.Color(0,200,10)); //colors of minutes
   pixels.setPixelColor(seconds, pixels.Color(255,0,0)); //colors of seconds
@@ -47,9 +54,10 @@ void printTime() {
   //animations of seconds:
   if(seconds==0)
    { 
-    pixels.setPixelColor(min1-1, pixels.Color(0,0,0));
-    pixels.setPixelColor(min1, pixels.Color(0,200,10));
+    pixels.setPixelColor(min1-1, pixels.Color(0,0,0)); //clean last minute
+    pixels.setPixelColor(min1, pixels.Color(0,200,10)); // set new minute
      pixels.show();
+     
     for(int i=1;i<60;i++)
       {
     pixels.setPixelColor(i, pixels.Color(0,0,0));
@@ -84,6 +92,16 @@ void animation()
  void colorWipe(uint32_t color, int wait) {     // c = color of leds
   for(int i=0; i<pixels.numPixels(); i++) {    // t = time 
     pixels.setPixelColor(i, color);
+    pixels.show();
+    delay(wait);
+  }
+}
+
+
+ void colorWipe2(uint32_t color, int wait) {     // c = color of leds
+  for(int i=0; i<pixels.numPixels(); i++) {    // t = time 
+    pixels.setPixelColor(i, color);
+    pixels.setBrightness(10);
     pixels.show();
     delay(wait);
   }
@@ -160,8 +178,11 @@ void setup() {
   if (F_CPU == 16000000) clock_prescale_set(clock_div_1); //definition of a microcontroller clock
 #endif
 pixels.begin();
-  pixels.show();
+pixels.show();
 pixels.begin();
+strip.begin();
+strip.show();
+strip.begin();
 
 pinMode( clockSet,INPUT); //button clocset
 
@@ -176,10 +197,12 @@ pinMode( clockSet,INPUT); //button clocset
 #endif
 
   pixels.begin(); // INITIALIZE NeoPixel pixels object (REQUIRED)
+  strip.begin(); // 
 }
 
 //pressing buttons: 
 void loop() {
+  //background();
   //change time:
     //1st press:
   if (control==1)
